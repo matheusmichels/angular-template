@@ -17,7 +17,8 @@ import { SectionComponent } from './components/section/section.component';
   ],
   exports: [
     OnlyNumberPipe,
-    PowerPipe
+    PowerPipe,
+    SectionComponent
   ]
 })
 export class SharedModule { }

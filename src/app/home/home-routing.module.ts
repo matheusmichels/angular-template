@@ -15,15 +15,7 @@ const routes: Routes = [
             {
                 path: '',
                 pathMatch: 'full',
-                redirectTo: 'list'
-            },
-            {
-                path: 'list',
-                component: UserListComponent
-            },
-            {
-                path: 'detail/:id',
-                component: UserDetailComponent
+                redirectTo: 'pipe'
             },
             {
                 path: 'pipe',
