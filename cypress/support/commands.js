@@ -1,3 +1,5 @@
+import { testCredentials } from '../support/credentials';
+
 // ***********************************************
 // This example commands.js shows you how to
 // create various custom commands and overwrite
@@ -23,3 +25,24 @@
 //
 // -- This is will overwrite an existing command --
 // Cypress.Commands.overwrite("visit", (originalFn, url, options) => { ... })
+
+Cypress.Commands.add('login', (credentials) => {
+  cy.visit('http://localhost:4200/auth');
+  cy.get('#trta1-auth')
+    .find(`input[type=email]`)
+    .should('be.focused')
+    .eq(0)
+    .clear().type(testCredentials.username);
+
+  cy.get('#trta1-auth')
+    .find(`input[type=password]`)
+    .eq(0)
+    .clear().type(testCredentials.password);
+
+  cy.get('#trta1-auth')
+    .find('.trta1-btn-primary')
+    .click();
+
+  cy.get('#trta1-mfs-later').click();
+  cy.url({timeout: 15000}).should('include', '/home');
+});

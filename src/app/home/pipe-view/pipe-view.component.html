@@ -1,0 +1,33 @@
+<h1>Pipes</h1>
+
+<h2> Default Pipes </h2>
+<p> My Birthdate: {{ birthDay | date:"dd/MM/yyyy"}} </p>
+<p> LowerCase: {{ upperCaseText | lowercase }}</p>
+<p>Uppercase: {{ lowerCaseText | uppercase}}</p>
+<p> Chaining Pipes: {{ birthDay | date | uppercase }} </p>
+<p> Async Pipe after 3 secs: {{ asyncObservable | async }} </p>
+<!-- Check: https://www.angularjswiki.com/angular/angular-currency-pipe-formatting-currency-in-angular/ -->
+<!-- https://www.concretepage.com/angular-2/angular-2-decimal-pipe-percent-pipe-and-currency-pipe-example -->
+<p> Currency: {{ currencyValue | currency:'BRL':'symbol':'2.1-1' }}</p>
+<p> Decimal Value: {{ decimalValue | number: '2.2-5' }} </p>
+<p> Percent value: {{ percentValue | percent }}</p>
+
+<!-- https://angular.io/api/common/SlicePipe -->
+<p> Slice: </p>
+<ul>
+    <li *ngFor="let i of collection | slice:1:4">{{i}}</li>
+</ul>
+<h3> Objects </h3>
+<p>Object without json pipe: {{ object }} </p>
+<p>Object with json pipe: {{ object | json}} </p>
+
+<h3>Title Case</h3>
+
+<p>some string: {{'some string' | titlecase}}</p> <!-- output is expected to be "Some String" -->
+<p>tHIs is mIXeD CaSe: {{'tHIs is mIXeD CaSe' | titlecase}}</p> <!-- output is expected to be "This Is Mixed Case" -->
+
+
+<h2>Custom Pipes</h2>
+<p> CPF with number: {{ cpfTransformerd }} </p>
+<p> CPF pipe on DOM: {{ cpf | onlyNumber }} </p>
+<p> Power Calculation (2^5): {{ 2 | power: 5 }} </p>
