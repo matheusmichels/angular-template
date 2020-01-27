@@ -1,10 +1,11 @@
 
 .container {
-    margin: 0 auto;
+    margin: 60px auto 70px;
     border: 0px transparent;
     .title {
       filter: drop-shadow(1px 1px 1px rgba(0, 0, 0, 0.05));
       font-size: 2.5em !important;
+      text-align: center;
       font-family: 'Exo 2', Arial, Helvetica, sans-serif;
       font-style: italic;
       margin: 0;
@@ -21,4 +22,3 @@
       margin-bottom: 40px;
     }
   }
-  

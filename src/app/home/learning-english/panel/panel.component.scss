@@ -1,0 +1,21 @@
+main {
+  &.jumbotron {
+    margin-top: 20px;
+    padding-top: 30px;
+  }
+
+  h6 {
+    padding-top: 20px;
+    font-weight: 600;
+  }
+
+  & .validate-action {
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  & .attempts {
+    display: flex;
+    justify-content: flex-end;
+  }
+}

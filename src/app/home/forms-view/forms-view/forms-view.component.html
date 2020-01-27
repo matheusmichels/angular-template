@@ -1,0 +1,197 @@
+<app-section title="Empty Form Example">
+  <form class="form" [formGroup]="peopleForm">
+    <div class="row">
+      <div class="col">
+        <app-custom-input
+          label="Name"
+          [validations]="{ required: 'Name is required' }"
+        >
+          <input
+            appInputRef
+            formControlName="name"
+            type="name"
+            class="form-control"
+            id="inputName"
+          />
+        </app-custom-input>
+      </div>
+
+      <div class="col">
+        <label for="inputEmail">Email</label>
+        <input
+          formControlName="email"
+          type="email"
+          class="form-control is-valid"
+          id="inputEmail"
+        />
+        <app-error-validator [control]="peopleForm.get('email')"></app-error-validator>
+      </div>
+    </div>
+
+    <div class="row" formGroupName="passwords">
+      <div class="col">
+        <label for="inputPassword">Password</label>
+        <input
+          formControlName="password"
+          type="password"
+          class="form-control is-valid"
+          id="inputPassword"
+        />
+      </div>
+      <div class="col">
+        <label for="inputConfirmPassword">ConfirmPassword</label>
+        <input
+          formControlName="confirmPassword"
+          type="password"
+          class="form-control is-valid"
+          id="inputConfirmPassword"
+        />
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="form-check">
+        <input
+          class="form-check-input"
+          type="checkbox"
+          id="isAPersonCheck"
+          formControlName="isAPerson"
+        />
+        <label class="form-check-label" for="isAPersonCheck">
+          I am a Person
+        </label>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="tipo">Type</label>
+      <select formControlName="type" class="form-control" name="tipo" id="tipo">
+        <option [value]="typePeopleEnum.FISICA">{{
+          typePeopleEnum.FISICA
+        }}</option>
+        <option [value]="typePeopleEnum.JURIDICA">{{
+          typePeopleEnum.JURIDICA
+        }}</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="inputCpf">CPF</label>
+      <input
+        formControlName="cpf"
+        type="name"
+        class="form-control is-valid"
+        id="inputCpf"
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="inputCnpj">CNPJ</label>
+      <input
+        formControlName="cnpj"
+        type="name"
+        class="form-control is-valid"
+        id="inputCnpj"
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="observation">Obs: </label>
+      <textarea
+        formControlName="observation"
+        class="form-control"
+        rows="3"
+        name="observation"
+        id="observacao"
+      ></textarea>
+    </div>
+
+    <div class="form-group">
+      <label for="inputBirthdayDate">Birthday Date</label>
+      <input
+        formControlName="birthDate"
+        type="date"
+        class="form-control is-invalid"
+        id="inputBirthdayDate"
+      />
+    </div>
+
+    <fieldset class="form-group" formGroupName="address">
+      <h2>Address</h2>
+
+      <div class="form-group">
+        <label for="inputZipCode">zip code</label>
+        <input
+          formControlName="zipCode"
+          type="number"
+          class="form-control is-valid"
+          id="inputZipCode"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="inputStreet">Street</label>
+        <input
+          formControlName="street"
+          type="text"
+          class="form-control is-valid"
+          id="inputStreet"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="inputNumber">Number</label>
+        <input
+          formControlName="number"
+          type="number"
+          class="form-control is-valid"
+          id="inputNumber"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="inputCity">City</label>
+        <input
+          formControlName="city"
+          type="text"
+          class="form-control is-valid"
+          id="inputCity"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="inputState">State</label>
+        <input
+          formControlName="state"
+          type="text"
+          class="form-control is-invalid"
+          id="inputState"
+        />
+      </div>
+    </fieldset>
+
+    <button
+      type="submit"
+      class="btn btn-primary"
+      [ngClass]="{ disabled: !isValid() }"
+    >
+      Submit
+    </button>
+    <button (click)="setDefaultValuesForm()" type="button" class="btn btn-primary">
+      Set other values Form
+    </button>
+
+    <button (click)="resetForm()" type="button" class="btn btn-primary">
+      Reset Form
+    </button>
+
+  </form>
+  <p>Form Status: {{ peopleForm.status }}</p>
+
+  <p>
+    Use this to help you mount the form:
+  </p>
+  <p>
+    {{ peopleForm.value | json }}
+  </p>
+</app-section>

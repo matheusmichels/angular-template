@@ -1,0 +1,28 @@
+<main class="jumbotron">
+  <div class="row">
+    <div class="col-6">
+      <app-progress-bar [progress]="progress"></app-progress-bar>
+    </div>
+    <div class="col-6">
+      <div class="attempts">
+        <app-attempts [totalAttempts]="attemptsRemaign"></app-attempts>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col">
+      <h6> {{ command }} </h6>
+      <div class="form-group">
+          <label for="English Phrase">{{ currentSentence.english }} </label>
+          <textarea (input)="onUpdateAnswer($event.target.value)" [value]="currentAnswer" class="form-control" id="answer" rows="3"></textarea>
+        </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col validate-action">
+        <button (click)="validateAnswer()" type="button" class="btn btn-primary">Validar Resposta</button>
+    </div>
+  </div>
+</main>

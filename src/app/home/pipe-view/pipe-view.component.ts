@@ -27,7 +27,6 @@ export class PipeViewComponent implements OnInit {
   ngOnInit() {
     const onlyNumberPipe = new OnlyNumberPipe();
     this.cpfTransformerd = onlyNumberPipe.transform(this.cpf);
-    console.log(this.cpfTransformerd);
     this.asyncObservable = of('I am an observable').pipe(delay(3000));
   }
 

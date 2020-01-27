@@ -1,6 +1,7 @@
-<p>home works!</p>
+<div class="btn-container d-flex justify-content-around">
+    <button class="btn btn-primary" [routerLink]="['/home', 'pipe']"> Go to Pipes </button>
+    <button class="btn btn-primary" [routerLink]="['/home', 'form']"> Go to Forms </button>
+    <button class="btn btn-primary" [routerLink]="['/home', 'learning-english']"> Go to English Learning </button>
 
-<div class="btn-container">
-    <button class="btn btn-primary" [routerLink]="['/home', 'pipe']"> Go to Pipes </button> 
 </div>
 <router-outlet></router-outlet>

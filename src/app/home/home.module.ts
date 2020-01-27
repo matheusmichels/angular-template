@@ -8,7 +8,6 @@ import { SharedModule } from '../shared/shared.module';
 import { PipeViewComponent } from './pipe-view/pipe-view.component';
 
 
-
 @NgModule({
   declarations: [HomeComponent, UserDetailComponent, UserListComponent, PipeViewComponent],
   imports: [
