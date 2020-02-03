@@ -43,18 +43,12 @@ export class InputRefDirective {
     return false;
   }
 
-  get invalid() {
-    return this.formControl
-      ? this.formControl.touched && this.formControl.invalid
-      : false;
-  }
-
   @HostBinding('class.is-valid')
   get StatusValid() {
     if (this.formControl.control == null) {
       return false;
     }
-    return this.formControl.control.valid;
+    return this.formControl.control.valid && this.formControl.touched;
   }
 
   @HostBinding('class.is-invalid')
@@ -62,6 +56,6 @@ export class InputRefDirective {
     if (this.formControl.control == null) {
       return false;
     }
-    return this.formControl.control.invalid;
+    return this.formControl.control.invalid && this.formControl.touched;
   }
 }

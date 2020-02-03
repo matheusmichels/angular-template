@@ -21,7 +21,7 @@ export class FormsView implements OnInit {
   peopleForm: FormGroup;
   contactList: FormArray;
   people = {
-    name: 'adrian'
+    email: 'adrianlemess@gmail.com'
   };
   constructor(private formBuilder: FormBuilder) {}
 
@@ -55,7 +55,7 @@ export class FormsView implements OnInit {
     return this.formBuilder.group({
       // start with a value
       name: [
-        this.people.name,
+        '',
         [
           Validators.required,
           Validators.minLength(5),
@@ -67,7 +67,7 @@ export class FormsView implements OnInit {
       cnpj: [''],
       observation: [''],
       birthDate: [''],
-      email: ['', [Validators.required, ValidationService.emailValidator]],
+      email: [this.people.email, [Validators.required, ValidationService.emailValidator]],
       isAPerson: [false, Validators.requiredTrue],
       passwords: this.formBuilder.group(
         {
