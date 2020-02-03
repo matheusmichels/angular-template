@@ -7,27 +7,18 @@ import { CustomInputComponent } from './components/custom-input/custom-input.com
 import { InputRefDirective } from './components/custom-input/input-ref.directive';
 import { ErrorValidatorComponent } from './components/error-validator/error-validator.component';
 
-
+const modules = [
+  OnlyNumberPipe,
+  PowerPipe,
+  SectionComponent,
+  CustomInputComponent,
+  InputRefDirective,
+  ErrorValidatorComponent
+];
 
 @NgModule({
-  declarations: [
-    OnlyNumberPipe,
-    PowerPipe,
-    SectionComponent,
-    CustomInputComponent,
-    InputRefDirective,
-    ErrorValidatorComponent
-  ],
-  imports: [
-    CommonModule
-  ],
-  exports: [
-    OnlyNumberPipe,
-    PowerPipe,
-    SectionComponent,
-    CustomInputComponent,
-    InputRefDirective,
-    ErrorValidatorComponent
-  ]
+  declarations: modules,
+  imports: [CommonModule],
+  exports: modules
 })
-export class SharedModule { }
+export class SharedModule {}
