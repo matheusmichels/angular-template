@@ -4,14 +4,17 @@
       <div class="col">
         <app-custom-input
           label="Name"
-          [validations]="{ required: 'Name is required' }"
+          [validations]="{
+            required: 'Name is required',
+            minlength: 'The minimum required is 5'
+          }"
         >
           <input
-            appInputRef
             formControlName="name"
             type="name"
             class="form-control"
             id="inputName"
+            appInputRef
           />
         </app-custom-input>
       </div>
@@ -21,10 +24,12 @@
         <input
           formControlName="email"
           type="email"
-          class="form-control is-valid"
+          class="form-control"
           id="inputEmail"
         />
-        <app-error-validator [control]="peopleForm.get('email')"></app-error-validator>
+        <app-error-validator
+          [control]="peopleForm.get('email')"
+        ></app-error-validator>
       </div>
     </div>
 
@@ -34,7 +39,7 @@
         <input
           formControlName="password"
           type="password"
-          class="form-control is-valid"
+          class="form-control"
           id="inputPassword"
         />
       </div>
@@ -43,7 +48,7 @@
         <input
           formControlName="confirmPassword"
           type="password"
-          class="form-control is-valid"
+          class="form-control"
           id="inputConfirmPassword"
         />
       </div>
@@ -78,9 +83,10 @@
     <div class="form-group">
       <label for="inputCpf">CPF</label>
       <input
+        mask="000.000.000-00"
         formControlName="cpf"
         type="name"
-        class="form-control is-valid"
+        class="form-control"
         id="inputCpf"
       />
     </div>
@@ -89,8 +95,9 @@
       <label for="inputCnpj">CNPJ</label>
       <input
         formControlName="cnpj"
+        mask="00.000.0000/0000-00"
         type="name"
-        class="form-control is-valid"
+        class="form-control"
         id="inputCnpj"
       />
     </div>
@@ -109,11 +116,86 @@
     <div class="form-group">
       <label for="inputBirthdayDate">Birthday Date</label>
       <input
+        mask="00/00/0000"
         formControlName="birthDate"
         type="date"
         class="form-control is-invalid"
         id="inputBirthdayDate"
       />
+    </div>
+
+    <div class="card-header">Contact Information</div>
+    <div class="card-body" formArrayName="contacts">
+      <div class="row">
+        <div
+          class="col-6"
+          *ngFor="let contact of contactFormGroup.controls; let i = index"
+        >
+          <div [formGroupName]="i" class="row">
+            <div class="form-group col-6">
+              <label>Contact name</label>
+              <input class="form-control" formControlName="name" type="text" />
+              <span
+                class="text-danger"
+                *ngIf="
+                  getContactsFormGroup(i).controls['name'].touched &&
+                  getContactsFormGroup(i).controls['name'].hasError('required')
+                "
+              >
+                Name is required!
+              </span>
+            </div>
+
+            <div class="form-group col-12">
+              <label>Phone No.</label>
+              <input
+                class="form-control"
+                formControlName="phone"
+                type="text"
+                mask="(00) 00000-0000"
+              />
+              <span
+                class="text-danger"
+                *ngIf="
+                  getContactsFormGroup(i).controls['phone'].touched &&
+                  getContactsFormGroup(i).controls['phone'].hasError('required')
+                "
+              >
+                Phone no is required!
+              </span>
+              <span
+                class="text-danger"
+                *ngIf="
+                  getContactsFormGroup(i).controls['phone'].touched &&
+                  getContactsFormGroup(i).controls['phone'].hasError('pattern')
+                "
+              >
+                Phone no. is not valid!
+              </span>
+            </div>
+            <div class="form-group col-12 text-right">
+              <button
+                class="btn btn-danger"
+                type="button"
+                (click)="removeContact(i)"
+              >
+                Remove
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="col-12">
+        <button
+          class="btn btn-primary m-1"
+          type="button"
+          (click)="addContact()"
+        >
+          Add Contact
+        </button>
+      </div>
     </div>
 
     <fieldset class="form-group" formGroupName="address">
@@ -123,8 +205,9 @@
         <label for="inputZipCode">zip code</label>
         <input
           formControlName="zipCode"
-          type="number"
-          class="form-control is-valid"
+          mask="00000-00"
+          type="text"
+          class="form-control"
           id="inputZipCode"
         />
       </div>
@@ -134,7 +217,7 @@
         <input
           formControlName="street"
           type="text"
-          class="form-control is-valid"
+          class="form-control"
           id="inputStreet"
         />
       </div>
@@ -144,7 +227,7 @@
         <input
           formControlName="number"
           type="number"
-          class="form-control is-valid"
+          class="form-control"
           id="inputNumber"
         />
       </div>
@@ -154,7 +237,7 @@
         <input
           formControlName="city"
           type="text"
-          class="form-control is-valid"
+          class="form-control"
           id="inputCity"
         />
       </div>
@@ -177,14 +260,17 @@
     >
       Submit
     </button>
-    <button (click)="setDefaultValuesForm()" type="button" class="btn btn-primary">
+    <button
+      (click)="setDefaultValuesForm()"
+      type="button"
+      class="btn btn-primary"
+    >
       Set other values Form
     </button>
 
     <button (click)="resetForm()" type="button" class="btn btn-primary">
       Reset Form
     </button>
-
   </form>
   <p>Form Status: {{ peopleForm.status }}</p>
 

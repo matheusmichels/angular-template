@@ -19,11 +19,12 @@ export class CustomInputComponent implements OnInit {
   }
 
   get isRequired() {
-    return this.input;
+    return this.input.isRequired;
   }
 
   get errorMessages() {
     const errors = this.input.errors;
+    console.log(errors);
     const messages = [];
     const keys = Object.keys(this.validations);
 

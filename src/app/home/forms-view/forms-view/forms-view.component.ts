@@ -3,7 +3,8 @@ import {
   FormBuilder,
   Validators,
   FormGroup,
-  AbstractControl
+  AbstractControl,
+  FormArray
 } from '@angular/forms';
 import { TypePeopleEnum } from './output-form.model';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
@@ -18,7 +19,7 @@ import { ValidationService } from 'src/app/shared/components/error-validator/val
 export class FormsView implements OnInit {
   typePeopleEnum = TypePeopleEnum;
   peopleForm: FormGroup;
-
+  contactList: FormArray;
   people = {
     name: 'adrian'
   };
@@ -46,12 +47,21 @@ export class FormsView implements OnInit {
     this.peopleForm.get('isAPerson').statusChanges.subscribe(value => {
       console.log('isAPerson Status', value);
     });
+
+    this.contactList = this.peopleForm.get('contacts') as FormArray;
   }
 
   initForm() {
     return this.formBuilder.group({
       // start with a value
-      name: [this.people.name, Validators.required],
+      name: [
+        this.people.name,
+        [
+          Validators.required,
+          Validators.minLength(5),
+          Validators.maxLength(255)
+        ]
+      ],
       type: [''],
       cpf: [''],
       cnpj: [''],
@@ -72,12 +82,8 @@ export class FormsView implements OnInit {
         number: [''],
         city: [''],
         state: ['']
-      })
-      // @todo
-      // array
-      // children: ,
-      // @TODO
-      // phones: this.getPhones()
+      }),
+      contacts: this.formBuilder.array([this.createContact()])
     });
   }
 
@@ -102,7 +108,8 @@ export class FormsView implements OnInit {
         number: '',
         city: '',
         state: ''
-      }
+      },
+      contacts: []
     });
   }
 
@@ -110,20 +117,46 @@ export class FormsView implements OnInit {
     this.peopleForm.reset();
   }
 
-  passwordConfirming(c: AbstractControl): { invalid: boolean } {
+  passwordConfirming(c: AbstractControl): { passwordInvalid: boolean } {
     if (c.get('password').value !== c.get('confirmPassword').value) {
-      return { invalid: true };
+      return { passwordInvalid: true };
     }
   }
-
-  // @TODO let cpf or cnpj required when type is selected
-  addValidator() {}
 
   isValid() {
     return this.peopleForm.valid;
   }
 
-  addFieldDynamic() {}
+  // FormArray methods
+  // https://codinglatte.com/posts/angular/angular-dynamic-form-fields-using-formarray/
 
-  getPhones() {}
+  createContact(): FormGroup {
+    return this.formBuilder.group({
+      name: [null, Validators.compose([Validators.required])],
+      phone: [
+        null,
+        Validators.compose([
+          Validators.required
+        ])
+      ]
+    });
+  }
+
+  get contactFormGroup() {
+    return this.peopleForm.get('contacts') as FormArray;
+  }
+
+  addContact() {
+    this.contactList.push(this.createContact());
+  }
+
+  getContactsFormGroup(index): FormGroup {
+    this.contactList = this.peopleForm.get('contacts') as FormArray;
+    const formGroup = this.contactList.controls[index] as FormGroup;
+    return formGroup;
+  }
+
+  removeContact(index) {
+    this.contactList.removeAt(index);
+  }
 }

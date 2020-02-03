@@ -1,11 +1,12 @@
 <div class="form-group">
   <label class="control-label">
-    {{ label }} <span *ngIf="isRequired">*</span>
+    {{ label }} <span *ngIf="!!isRequired">*</span>
   </label>
   <div [ngClass]="{ 'has-error': isError }">
     <ng-content></ng-content>
     <ng-container *ngIf="isError">
       <span class="text-danger" *ngFor="let msg of errorMessages">
+        <!-- We might use async pipe here to support translation -->
         {{ msg }}</span
       >
     </ng-container>

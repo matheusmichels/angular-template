@@ -4,8 +4,7 @@ import { FormsRoutingModule } from './forms-routing.module';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { FormsView } from './forms-view/forms-view.component';
-
-
+import { NgxMaskModule } from 'ngx-mask';
 
 @NgModule({
   declarations: [
@@ -15,8 +14,11 @@ import { FormsView } from './forms-view/forms-view.component';
     CommonModule,
     FormsRoutingModule,
     FormsModule,
+    ReactiveFormsModule,
     SharedModule,
-    ReactiveFormsModule
+    NgxMaskModule.forRoot({
+      validation: true
+    }),
   ]
 })
 export class FormsViewModule { }
