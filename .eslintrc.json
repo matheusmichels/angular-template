@@ -29,6 +29,7 @@
     "class-methods-use-this": "off",
     "no-await-in-loop": "off",
     "import/prefer-default-export": "off",
+    "no-useless-constructor": "off",
     "no-console": "off",
     "no-alert": "off",
     "@typescript-eslint/explicit-function-return-type": "off",
@@ -43,7 +44,7 @@
       "warn",
       {
         "newlinesBetween": "always",
-        "groups": ["module", "/^@shared/", ["parent", "sibling", "index"]],
+        "groups": ["module", ["parent", "sibling", "index"]],
         "alphabetize": { "order": "asc", "ignoreCase": true }
       }
     ]
