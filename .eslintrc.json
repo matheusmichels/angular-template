@@ -33,6 +33,11 @@
     "no-console": "off",
     "no-alert": "off",
     "@typescript-eslint/explicit-function-return-type": "off",
+    "lines-between-class-members": [
+      "error",
+      "always",
+      { "exceptAfterSingleLine": true }
+    ],
     "import/extensions": [
       "error",
       "ignorePackages",
