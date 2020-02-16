@@ -20,7 +20,7 @@
   "parserOptions": {
     "ecmaVersion": 2018,
     "sourceType": "module",
-    "project": "./tsconfig.app.json"
+    "project": "./tsconfig.json"
   },
   "plugins": ["@typescript-eslint", "prettier", "import-helpers"],
   "rules": {
